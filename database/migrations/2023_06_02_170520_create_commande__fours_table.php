@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('commande__fours', function (Blueprint $table) {
             $table->id();
+            $table->foreignId("fournisseur_id")->onDeleteCascade();
+            $table->string("statut_comF");
             $table->timestamps();
         });
     }

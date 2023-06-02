@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('paiements', function (Blueprint $table) {
             $table->id();
+            $table->string("info_paye");
+            $table->foreignId("commande_id")->onDeleteCascade()->onUpdateCascade();
             $table->timestamps();
         });
     }

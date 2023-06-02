@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('livraisons', function (Blueprint $table) {
             $table->id();
+            $table->string("status_liv");
+            $table->double("fraie_liv");
+            $table->foreignId("personnel_id")->onDeleteCascade()->onUpdateCascade();
+            $table->foreignId("commande_id")->onDeleteCascade()->onUpdateCascade();
+
             $table->timestamps();
         });
     }

@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('article__fours', function (Blueprint $table) {
             $table->id();
+            $table->foreignId("commande_four_id")->onDeleteCascade();
+            $table->foreignId("produit_id")->onDeleteCascade();
+            $table->integer("qteC_Artf");
+            
             $table->timestamps();
         });
     }

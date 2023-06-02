@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('factures', function (Blueprint $table) {
             $table->id();
+            $table->string("num_fact");
+            $table->foreignId("commande_id")->onDeleteCascade()->onUpdateCascade();
             $table->timestamps();
         });
     }

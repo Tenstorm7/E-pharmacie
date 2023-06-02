@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('familles', function (Blueprint $table) {
             $table->id();
+            $table->string("nom_fam");
+            $table->string("descri_fam");
             $table->timestamps();
         });
     }

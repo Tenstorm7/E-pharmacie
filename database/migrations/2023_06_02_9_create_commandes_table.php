@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('commandes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId("client_id")->onDeleteCascade()->onUpdateCascde();
+            $table->foreignId("operateur_id")->onDeleteCascade()->onUpdateCascde();
+            $table->foreignId("adresse_id")->onDeleteCascade()->onUpdateCascde();
+            $table->string("status_com");
+
+
             $table->timestamps();
         });
     }

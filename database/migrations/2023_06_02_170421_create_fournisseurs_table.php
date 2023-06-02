@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('fournisseurs', function (Blueprint $table) {
             $table->id();
+            $table->string("nom_four");
+            $table->string("email_four");
+            $table->string("tel_four");
+           
+            $table->string("urlsit_four");
+            $table->string("adress_four");
             $table->timestamps();
         });
     }
