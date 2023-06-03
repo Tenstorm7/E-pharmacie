@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string("dateN_clt");
             $table->string("url_clt");
             $table->string("adress_clt");
-            
+
             $table->timestamps();
         });
     }

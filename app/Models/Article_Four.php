@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Article_Four extends Model
 {
     use HasFactory;
+    protected $guarded = [];
     protected $fillable = ['qte_artf'];
 
     public function commande_Four(): BelongsTo {

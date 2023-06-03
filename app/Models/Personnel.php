@@ -19,7 +19,8 @@ class Personnel extends Model
         'dateN_pers',
         'qualif_pers',
         'url_pers',
-        'adress_pers'
+        'adress_pers',
+        'mot_de_pass_pers'
     ];
 
     public function commande_Four(): HasMany{
