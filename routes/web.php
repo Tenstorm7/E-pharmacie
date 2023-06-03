@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -34,5 +36,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+//routes pour le personnel
+Route::get('/personnel/index',[PersonnelController::class,'create'])->name("personel.index");
+Route::post('/personnel/store',[PersonnelController::class,'store'])->name("personnel.store");
+
+//routes pour les clients 
+Route::get('/client/index',[ClientController::class,'index'])->name('client.index');
+Route::post('/client/store',[ClientController::class,'store'])->name('client.store');
 
 require __DIR__.'/auth.php';
