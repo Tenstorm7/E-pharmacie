@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Facture extends Model
+class Conseil extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $fillable = ['num_fact'];
+    protected $fillable = ['contenue'];
 
-    public function commande(): BelongsTo {
-        return $this->belongsTo(Commentaire::class);
+
+    public function personnel(): BelongsTo {
+        return $this->belongsTo(Personnel::class);
     }
-
 }
