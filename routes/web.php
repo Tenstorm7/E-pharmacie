@@ -42,8 +42,12 @@ Route::middleware('auth')->group(function () {
 Route::get('/personnel/index',[PersonnelController::class,'create'])->name("personel.index");
 Route::post('/personnel/store',[PersonnelController::class,'store'])->name("personnel.store");
 
-//routes pour les clients 
+//routes pour les clients
 Route::get('/client/index',[ClientController::class,'index'])->name('client.index');
 Route::post('/client/store',[ClientController::class,'store'])->name('client.store');
-
+Route::get('/client/create',[ClientController::class,'create'])->name('client.create');
+Route::get('/client/show',[ClientController::class,'show'])->name('client.show');
+Route::delete('/client/destroy/{client}',[ClientController::class,'destroy'])->name('client.delete');
+Route::get('/client/edit/{client}',[ClientController::class,'edit'])->name('client.edit');
+Route::post('/client/update/{client}',[ClientController::class,'update'])->name('client.update');
 require __DIR__.'/auth.php';
