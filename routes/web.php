@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\FamilleController;
 use App\Http\Controllers\PersonnelController;
+use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -43,7 +46,23 @@ Route::get('/personnel/index',[PersonnelController::class,'create'])->name("pers
 Route::post('/personnel/store',[PersonnelController::class,'store'])->name("personnel.store");
 
 //routes pour les clients 
-Route::get('/client/index',[ClientController::class,'index'])->name('client.index');
-Route::post('/client/store',[ClientController::class,'store'])->name('client.store');
+
+
+
+//pour la fimille de produit 
+Route::get('/famille/index',[FamilleController::class,'create'])->name('famille.index');
+Route::post('/famille/store',[FamilleController::class,'store'])->name('famille.store');
+Route::get('/famille/show',[FamilleController::class,'index'])->name('famille.show');
+
+//pour le categorie de produit 
+Route::get('/categorie/{id}',[CategorieController::class,'create'])->name('categorie.create');
+Route::post('/categorie/store/{id_famille}',[CategorieController::class,'store'])->name('categorie.store');
+
+// pour les produit 
+Route::get('/produit/create',[ProduitController::class,'create'])->name('produit.create');
+Route::post('/produit/store',[ProduitController::class,'store'])->name('produit.store');
+Route::get('/produit/index',[ProduitController::class,'index'])->name('produit.index');
+Route::get('/produit/update',[ProduitController::class,'update'])->name('produit.update');
+Route::delete('/produit/delete',[ProduitController::class,'destroy'])->name('produit.destroy');
 
 require __DIR__.'/auth.php';
