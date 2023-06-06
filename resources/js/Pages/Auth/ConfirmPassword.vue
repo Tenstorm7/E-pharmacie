@@ -14,7 +14,7 @@ const submit = () => {
     form.post(route('password.confirm'), {
         onFinish: () => form.reset(),
     });
-};
+}; 
 </script>
 
 <template>
