@@ -46,7 +46,33 @@ Route::get('/personnel/index',[PersonnelController::class,'create'])->name("pers
 Route::post('/personnel/store',[PersonnelController::class,'store'])->name("personnel.store");
 
 //routes pour les clients 
+
+
+//pour la fimille de produit 
+Route::get('/famille/index',[FamilleController::class,'create'])->name('famille.index');
+Route::post('/famille/store',[FamilleController::class,'store'])->name('famille.store');
+Route::get('/famille/show',[FamilleController::class,'index'])->name('famille.show');
+
+//pour le categorie de produit 
+Route::get('/categorie/{id}',[CategorieController::class,'create'])->name('categorie.create');
+Route::post('/categorie/store/{id_famille}',[CategorieController::class,'store'])->name('categorie.store');
+
+// pour les produit 
+Route::get('/produit/create',[ProduitController::class,'create'])->name('produit.create');
+Route::post('/produit/store',[ProduitController::class,'store'])->name('produit.store');
+Route::get('/produit/index',[ProduitController::class,'index'])->name('produit.index');
+Route::post('/produit/update/{produit}',[ProduitController::class,'update'])->name('produit.update');
+Route::get('/produit/edit/{produit}',[ProduitController::class,'edit'])->name('produit.edit');
+Route::delete('/produit/delete/{produit}',[ProduitController::class,'destroy'])->name('produit.destroy');
+
+
+//routes pour les clients
 Route::get('/client/index',[ClientController::class,'index'])->name('client.index');
 Route::post('/client/store',[ClientController::class,'store'])->name('client.store');
+Route::get('/client/create',[ClientController::class,'create'])->name('client.create');
+Route::get('/client/show',[ClientController::class,'show'])->name('client.show');
+Route::delete('/client/destroy/{client}',[ClientController::class,'destroy'])->name('client.delete');
+Route::get('/client/edit/{client}',[ClientController::class,'edit'])->name('client.edit');
+Route::post('/client/update/{client}',[ClientController::class,'update'])->name('client.update');
 
 require __DIR__.'/auth.php';

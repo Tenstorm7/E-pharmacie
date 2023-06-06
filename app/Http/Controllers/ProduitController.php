@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categorie;
 use App\Models\Produit;
-use Illuminate\Contracts\View\View;
+use App\Models\Categorie;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\View as ViewView;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\View as FacadesView;
 
 class ProduitController extends Controller
 {
@@ -21,7 +24,7 @@ class ProduitController extends Controller
     {
         $prod=Produit::all();
 
-        return view('Produit.index', compact('prod'));
+        return view('Produit.show', compact('prod'));
     }
 
     /**
@@ -49,13 +52,15 @@ class ProduitController extends Controller
         $request->validate([
                 'nom_prod' => ['required','max:255'],
                 'descri_prod' => ['required','string' , 'min:10'],
-                'prix_prod' => ['required','integer'],
+                'prix_prod' => ['required'],
                
-                'url_prod' => ['required'],
+                'url_prod' => ['required','image'],
                
                 'qteS_prod' => ['required','integer'],
 
             ]);
+
+           
 
            
 
@@ -70,31 +75,28 @@ class ProduitController extends Controller
         
         
        
-       
+      
 
        $path= $request->url_prod->storeAs(
             'ProduitImage',
             $filename,
             'public'
         );
-
        
+       $categorie=Categorie::findOrfail($request->categorie_id);
+        $prod =new Produit();
+        $prod->nom_prod=$request->nom_prod;
+        $prod->prix_prod=$request->prix_prod;
+        
+        $prod->url_prod=$path;
+        $prod->descri_prod=$request->descri_prod;
+        $prod->qteS_prod=$request->qteS_prod;
+        $categorie->produits()->save($prod);
 
-            $produitf=Produit::create([
-
-               'url_prod' => $path,
-                'nom_prod' => $request->nom_prod,
-                'description_prod' => $request->descri_prod,
-                
-                'qteS_prod' => $request->qteS_prod,
-                'prix_prod' => $request->prix_prod,
-               
-                
-            ]);
-           
+         
 
              
-return redirect(route('Produit.index'));
+return redirect(route('produit.index'));
     
     }
 
@@ -122,7 +124,9 @@ return redirect(route('Produit.index'));
      */
     public function edit(Produit $Produit)
     {
-        //
+        
+        $cats=Categorie::all();
+        return view('Produit.update',compact('Produit','cats'));
     }
 
     /**
@@ -132,9 +136,51 @@ return redirect(route('Produit.index'));
      * @param  \App\Models\Produit  $Produit
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Produit $Produit)
+    public function update(Request $request, produit $produit)
     {
-        //
+
+        
+        $request->validate([
+            'nom_prod' => ['required','max:255'],
+            'descri_prod' => ['required','string' , 'min:10'],
+            'prix_prod' => ['required'],
+           
+            'url_prod' => ['required','image'],
+           
+            'qteS_prod' => ['required','integer'],
+
+        ]);
+
+        
+            // $extension=substr(strrchr($request->url_prod,'.'),1);
+            
+        // renommer le fichier avant de le stocker par la suite
+
+        $filename= 'Produit'.time().'.'. $request->url_prod->extension();
+        
+        
+       
+      
+
+       $path= $request->url_prod->storeAs(
+            'ProduitImage',
+            $filename,
+            'public'
+        );
+       
+       $categorie=Categorie::findOrfail($request->categorie_id);
+        //modifier le produit recuperer dans les parametres
+        $produit->nom_prod=$request->nom_prod;
+        $produit->prix_prod=$request->prix_prod;
+        
+        $produit->url_prod=$path;
+        $produit->descri_prod=$request->descri_prod;
+        $produit->qteS_prod=$request->qteS_prod;
+        $categorie->produits()->save($produit);
+
+
+        return redirect(route('produit.index'));
+        
     }
 
     /**
@@ -145,6 +191,9 @@ return redirect(route('Produit.index'));
      */
     public function destroy(Produit $Produit)
     {
-        //
+        $Produit->delete();
+
+        return redirect(route('produit.index'));
+
     }
 }
