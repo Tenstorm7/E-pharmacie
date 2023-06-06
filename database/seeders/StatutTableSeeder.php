@@ -39,6 +39,9 @@ class StatutTableSeeder extends Seeder
                 'titre_status'=>'vendeur',
             ],
             [
+                'titre_status'=>'client',
+            ],
+            [
                 'titre_status'=>'autre',
             ],
         ];
