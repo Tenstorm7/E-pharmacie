@@ -10,7 +10,7 @@ class Conseil extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $fillable = ['contenue'];
+    protected $fillable = ['theme', 'contenue'];
 
 
     public function personnel(): BelongsTo {
