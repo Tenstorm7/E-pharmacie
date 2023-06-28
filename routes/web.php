@@ -42,8 +42,11 @@ Route::middleware('auth')->group(function () {
 
 
 //routes pour le personnel
-Route::get('/personnel/index',[PersonnelController::class,'create'])->name("personel.index");
-Route::post('/personnel/store',[PersonnelController::class,'store'])->name("personnel.store");
+Route::get('/personnel/index',[PersonnelController::class,'index'])->name("personnel.index");
+Route::get('/personnel/create/{user}',[PersonnelController::class,'create'])->name("personnel.create");
+Route::post('/personnel/update/{user}',[PersonnelController::class,'update'])->name("personnel.update");
+Route::post('/personnel/show/{user}',[PersonnelController::class,'show'])->name("personnel.show");
+Route::delete('/personnel/destroy/{user}',[ProduitController::class,'destroy'])->name('personnel.delete');
 
 //routes pour les conseils
 

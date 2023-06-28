@@ -38,7 +38,7 @@ class ClientController extends Controller
     {
         $request->validate([
             'nom_clt' => 'required',
-            'prenom_clt' => 'required',
+            'prenom_clt' => 'required', 
             'tel_clt' => 'required',
             'email_clt' => 'required|unique:clients,email_clt',
             'dateN_clt' => 'required',
