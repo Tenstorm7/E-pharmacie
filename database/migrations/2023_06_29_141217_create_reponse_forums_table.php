@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('message_pers', function (Blueprint $table) {
+        Schema::create('reponse_forums', function (Blueprint $table) {
             $table->id();
+            $table->string('reponseforum');
+            $table->foreignId("message_forums_id")->onDeleteCascade();
             $table->foreignId("user_id")->onDeleteCascade();
-            $table->string("conten_smsP");
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('message_pers');
+        Schema::dropIfExists('reponse_forums');
     }
 };
