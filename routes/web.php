@@ -8,11 +8,13 @@ use App\Http\Controllers\FamilleController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\MessagePersController;
 use App\Http\Controllers\ReponsePersController;
 use App\Http\Controllers\MessageForumController;
 use App\Http\Controllers\ReponseForumController;
+use App\Models\Commentaire;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,10 +99,22 @@ Route::delete('/message/delete/{mespers}',[MessagePersController::class,'destroy
 //route pour les reponses prive
 Route::get('/reponsepers/create/{mespers}',[ReponsePersController::class,'create'])->name('reponsepers.create');
 Route::post('/reponsepers/store/{mespers}',[ReponsePersController::class,'store'])->name('reponsepers.store');
+Route::delete('/reponsepers/delete/{reppers}',[ReponsePersController::class,'destroy'])->name('reponsepers.delete');
 
 //route pour les reponses du forum
 Route::get('/reponseforum/create/{mesforum}',[ReponseForumController::class,'create'])->name('reponseforum.create');
 Route::post('/reponseforum/store/{mesforum}',[ReponseForumController::class,'store'])->name('reponseforum.store');
+Route::delete('/reponseforum/delete/{repforum}',[ReponseForumController::class,'destroy'])->name('reponseforum.delete');
 
+// route pour les commentaires
+Route::get('/commentaire/create', [CommentaireController::class, 'create'])->name('commentaire.create');
+Route::get('/commentaire/index', [CommentaireController::class, 'index'])->name('commentaire.index');
+Route::post('/commentaire/store', [CommentaireController::class, 'store'])->name('commentaire.store');
+Route::delete('/commentaire/delete/{comments}', [CommentaireController::class, 'destroy'])->name('commentaire.delete');
 
+//route pour la localisation
+
+Route::get('/localisation', function () {
+    return view('localisation.localisation');
+});
 require __DIR__.'/auth.php';

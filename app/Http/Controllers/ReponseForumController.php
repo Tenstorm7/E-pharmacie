@@ -34,4 +34,16 @@ class ReponseForumController extends Controller
         return redirect()->route('forum.index');
     }
 
+     /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\ReponseForum  $repforum
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(ReponseForum $repforum)
+    {
+        $repforum->delete();
+
+    }
+
 }

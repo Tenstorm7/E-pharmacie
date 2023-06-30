@@ -34,4 +34,17 @@ class ReponsePersController extends Controller
 
         return redirect()->route('message.index');
     }
+
+     /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\ReponsePers  $reppers
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(ReponsePers $reppers)
+    {
+        $reppers->delete();
+
+    }
+
 }

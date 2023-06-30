@@ -13,8 +13,8 @@ class Commentaire extends Model
     protected $guarded = [];
     protected $fillable = ['content_comment'];
 
-    public function client(): BelongsTo {
-        return $this->belongsTo(Client::class);
+    public function user(): BelongsTo {
+        return $this->belongsTo(User::class);
     }
 
 }
