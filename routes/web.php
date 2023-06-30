@@ -21,14 +21,16 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
+
+Route::get('/', function () { return Inertia::render('Acceuil'); })->name('acceuil');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -40,6 +42,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Route du pannel Admin @WillySmith
+Route::get('/medicaments', function () {
+    return Inertia::render('Categories/ListeCategories', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+})->name('medicaments');
+
 
 //routes pour le personnel
 Route::get('/personnel/index',[PersonnelController::class,'create'])->name("personel.index");
@@ -48,5 +60,7 @@ Route::post('/personnel/store',[PersonnelController::class,'store'])->name("pers
 //routes pour les clients 
 Route::get('/client/index',[ClientController::class,'index'])->name('client.index');
 Route::post('/client/store',[ClientController::class,'store'])->name('client.store');
+
+
 
 require __DIR__.'/auth.php';
