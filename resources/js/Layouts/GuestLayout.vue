@@ -12,14 +12,18 @@ import { Link } from '@inertiajs/vue3';
         </div>
 
         <div
-            class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg"
+            class="w-full max-w-[400px] mt-6 px-6 py-4 bg-white border border-gray-300 overflow-hidden rounded-sm"
         >
             <slot />
         </div>
-        <div
-            class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg"
-        >
-            <slot name="footer"/>
+
+        <div v-if="$page.url === '/login'" class="w-[400px]">
+            <div class="text-center text-sm text-gray-600 font-bold py-4">New to Amazon?</div>
+            <div class="w-full border border-gray-500 bg-gray-200 text-sm font-extrabold p-2 hover:bg-gray-300 text-center">
+                <Link :href="route('register')">
+                    Create your Amazon account
+                </Link>
+            </div>
         </div>
     </div>
 </template>

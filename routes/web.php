@@ -27,14 +27,16 @@ use App\Models\Commentaire;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
+
+Route::get('/', function () { return Inertia::render('Acceuil'); })->name('acceuil');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -45,6 +47,16 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Route du pannel Admin @WillySmith
+Route::get('/medicaments', function () {
+    return Inertia::render('Categories/ListeCategories', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+})->name('medicaments');
 
 
 //routes pour le personnel
@@ -112,9 +124,14 @@ Route::get('/commentaire/index', [CommentaireController::class, 'index'])->name(
 Route::post('/commentaire/store', [CommentaireController::class, 'store'])->name('commentaire.store');
 Route::delete('/commentaire/delete/{comments}', [CommentaireController::class, 'destroy'])->name('commentaire.delete');
 
+<<<<<<< HEAD
 //route pour la localisation
 
 Route::get('/localisation', function () {
     return view('localisation.localisation');
 });
+=======
+
+
+>>>>>>> b1330fd87b8368fba2d5b50e33a57ef03349cba3
 require __DIR__.'/auth.php';

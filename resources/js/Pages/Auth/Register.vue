@@ -17,6 +17,7 @@ const form = useForm({
     birthdate: '',
     password: '',
     password_confirmation: '',
+    terms: false,
 });
 
 const submit = () => {
@@ -129,6 +130,11 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.password_confirmation" />
             </div>
 
+<<<<<<< HEAD
+            <div class="my-3">
+                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Continue
+=======
             <div class="flex items-center justify-end mt-4">
                 <Link :href="route('login')"
                     class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
@@ -137,8 +143,24 @@ const submit = () => {
 
                 <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Register
+>>>>>>> 92478725a965aaa3d23a00f81d8b5f790d69d66c
                 </PrimaryButton>
             </div>
+
+            <div class="text-xs pt-4">
+                By signing-in you agree to PHARMA237 Conditions of Use & Sale.
+                Please see our Privacy Notice, our Cookies Notice and our Interest-Based Ads Notice.
+            </div>
+
+            <div class="flex items-center justify-start mt-4">
+                <Link
+                    :href="route('login')"
+                    class="hover:underline text-sm text-blue-700 hover:text-red-700 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                    Sign in?
+                </Link>
+            </div>
+
         </form>
     </GuestLayout>
 </template>

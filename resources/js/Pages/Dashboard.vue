@@ -32,7 +32,7 @@ import { Head } from '@inertiajs/vue3';
                             <td>En Stock</td>
                             <td><a href="#">notice</a></td>
                             <td class="items-center flex flex-rows-1 ">
-                                <button class="text-xl ml-3 rounded-full"><svg xmlns="http://www.w3.org/2000/svg"
+                                <button class="text-xl ml-3 w-10 h-5 rounded-xl"><svg xmlns="http://www.w3.org/2000/svg"
                                         fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                         class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
@@ -96,17 +96,17 @@ import { Head } from '@inertiajs/vue3';
                     </tbody>
                 </table>
             </div>
-            <div class="grid grid-cols py-9 ml-9">
-                <div>
+            <div class="grid grid-cols py-9 ml-auto mr-auto ml-9">
+                <div class="box  h-100 w-120">
                     <button
-                        class="bg-neutral-900 ml-5 text-white rounded borderborder-sky-100 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">Continuer
-                        l'ajout</button>
+                        class="bg-neutral-900 ml-5 text-white rounded scale-100 h-100 w-120 border border-sky-100 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">Continuer
+                         l'ajout</button>
                 </div>
 
                 <div class="box-content h-64 w-69 p-4 border-3">
                     <label class="text-emerald-600" for="total"> TOTAL Produits: 15k</label><br>
                     <label class="" for="livraison"> Frais livraison: 2k</label><br><br>
-                    <label class="" for="TOTAL"> TOTAL : 17k </label><br><br>
+                    <label class="" for="TOTAL"> TOTAL : 17k </label><br>
                     <button
                         class="bg-emerald-600 font-mono rounded border border-sky-100 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-11 hover:bg-orange-600 duration-300">Commander</button>
 

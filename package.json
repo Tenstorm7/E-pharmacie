@@ -19,6 +19,7 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
+        "@heroicons/vue": "^2.0.18",
         "@vueuse/core": "^10.1.2"
     }
 }
