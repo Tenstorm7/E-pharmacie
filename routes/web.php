@@ -1,14 +1,18 @@
 <?php
 
-use App\Http\Controllers\CategorieController;
-use App\Http\Controllers\ClientController;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\ConseilController;
 use App\Http\Controllers\FamilleController;
-use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\PersonnelController;
+use App\Http\Controllers\MessagePersController;
+use App\Http\Controllers\ReponsePersController;
+use App\Http\Controllers\MessageForumController;
+use App\Http\Controllers\ReponseForumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,12 +58,62 @@ Route::get('/medicaments', function () {
 
 
 //routes pour le personnel
-Route::get('/personnel/index',[PersonnelController::class,'create'])->name("personel.index");
-Route::post('/personnel/store',[PersonnelController::class,'store'])->name("personnel.store");
+Route::get('/personnel/index',[PersonnelController::class,'index'])->name("personnel.index");
+Route::get('/personnel/create/{user}',[PersonnelController::class,'create'])->name("personnel.create");
+Route::post('/personnel/update/{user}',[PersonnelController::class,'update'])->name("personnel.update");
+Route::post('/personnel/show/{user}',[PersonnelController::class,'show'])->name("personnel.show");
+Route::delete('/personnel/destroy/{user}',[ProduitController::class,'destroy'])->name('personnel.delete');
 
-//routes pour les clients 
-Route::get('/client/index',[ClientController::class,'index'])->name('client.index');
-Route::post('/client/store',[ClientController::class,'store'])->name('client.store');
+
+
+
+//pour la fimille de produit
+Route::get('/famille/index',[FamilleController::class,'create'])->name('famille.index');
+Route::post('/famille/store',[FamilleController::class,'store'])->name('famille.store');
+Route::get('/famille/show',[FamilleController::class,'index'])->name('famille.show');
+
+//pour le categorie de produit
+Route::get('/categorie/{id}',[CategorieController::class,'create'])->name('categorie.create');
+Route::post('/categorie/store/{id_famille}',[CategorieController::class,'store'])->name('categorie.store');
+
+// pour les produit
+Route::get('/produit/create',[ProduitController::class,'create'])->name('produit.create');
+Route::post('/produit/store',[ProduitController::class,'store'])->name('produit.store');
+Route::get('/produit/index',[ProduitController::class,'index'])->name('produit.index');
+Route::post('/produit/update/{produit}',[ProduitController::class,'update'])->name('produit.update');
+Route::get('/produit/edit/{produit}',[ProduitController::class,'edit'])->name('produit.edit');
+Route::delete('/produit/delete/{produit}',[ProduitController::class,'destroy'])->name('produit.destroy');
+
+
+//routes pour les conseils
+Route::get('/conseil/index',[ConseilController::class,'index'])->name('conseil.index');
+Route::post('/conseil/store',[ConseilController::class,'store'])->name('conseil.store');
+Route::get('/conseil/create',[ConseilController::class,'create'])->name('conseil.create');
+Route::get('/conseil/show',[ConseilController::class,'show'])->name('conseil.show');
+Route::delete('/conseil/destroy/{conseil}',[ConseilController::class,'destroy'])->name('conseil.delete');
+Route::get('/conseil/edit/{conseil}',[ConseilController::class,'edit'])->name('conseil.edit');
+Route::post('/conseil/update/{conseil}',[ConseilController::class,'update'])->name('conseil.update');
+
+//routes pour messages forum
+Route::get('/forum/index',[MessageForumController::class,'index'])->name('forum.index');
+Route::post('/forum/store',[MessageForumController::class,'store'])->name('forum.store');
+Route::get('/forum/show/{mesforum}',[MessageForumController::class,'show'])->name('forum.show');
+Route::delete('/forum/delete/{mesforum}',[MessageForumController::class,'destroy'])->name('forum.delete');
+
+//routes pour messages prive
+Route::get('/message/index',[MessagePersController::class,'index'])->name('message.index');
+Route::post('/message/store',[MessagePersController::class,'store'])->name('message.store');
+Route::get('/message/show/{mespers}',[MessagePersController::class,'show'])->name('message.show');
+Route::delete('/message/delete/{mespers}',[MessagePersController::class,'destroy'])->name('message.delete');
+
+//route pour les reponses prive
+Route::get('/reponsepers/create/{mespers}',[ReponsePersController::class,'create'])->name('reponsepers.create');
+Route::post('/reponsepers/store/{mespers}',[ReponsePersController::class,'store'])->name('reponsepers.store');
+
+//route pour les reponses du forum
+Route::get('/reponseforum/create/{mesforum}',[ReponseForumController::class,'create'])->name('reponseforum.create');
+Route::post('/reponseforum/store/{mesforum}',[ReponseForumController::class,'store'])->name('reponseforum.store');
+
 
 
 

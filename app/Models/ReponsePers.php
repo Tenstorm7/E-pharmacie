@@ -6,14 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Conseil extends Model
+class ReponsePers extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $fillable = ['theme', 'contenue'];
+    protected $fillable = [
+        'reponsepers'
+    ];
 
+    public function messagepers(): BelongsTo
+    {
+        return $this->belongsTo(MessagePers::class);
 
-    public function personnel(): BelongsTo {
-        return $this->belongsTo(Personnel::class);
     }
+
 }

@@ -67,7 +67,7 @@ class CategorieController extends Controller
           
 
              
-return redirect(route('Categorie.show'));
+return redirect(route('categorie.show'));
     
     }
 

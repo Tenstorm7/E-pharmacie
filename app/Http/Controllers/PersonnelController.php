@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Statut;
 use App\Models\Personnel;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class PersonnelController extends Controller
 {
-    //les methde de traitement 
+    //les methde de traitement
      /**
      * Display a listing of the resource.
      *
@@ -16,9 +19,9 @@ class PersonnelController extends Controller
      */
     public function index()
     {
-        $pers=Personnel::all();
+        $user = User::all();
 
-        return view('Personnel.index', compact('pers'));
+        return view('personnel.index', compact('user'));
     }
 
     /**
@@ -26,97 +29,35 @@ class PersonnelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create():View
+    public function create(User $user):View
     {
-        return view('Personnel.index');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-
-    {
-        
-        
-        $request->validate([
-                'nom_pers' => ['required','max:255'],
-                'prenom_pers' => ['required','string' , 'min:10'],
-                'tel_pers' => ['required'],
-                'email_pers' => ['required', 'string','max:255'],
-                'dateN_pers' => ['required','date'],
-                'url_pers' => ['required'],
-                'adress_pers' => ['required'],
-                'qualif_pers' => ['required'],
-
-            ]);
-
-            
-
-
-            // $extension=substr(strrchr($request->url_pers,'.'),1);
-            
-        // renommer le fichier avant de le stocker par la suite
-
-        $filename= 'Personnel'.time().'.'. $request->url_pers->extension();
-        
-        
-       
-       
-
-       $path= $request->url_pers->storeAs(
-            'PersonnelImage',
-            $filename,
-            'public'
-        );
-
-       
-
-            $form=Personnel::create([
-
-               'url_pers' => $path,
-                'nom_pers' => $request->nom_pers,
-                'prenom_pers' => $request->prenom_pers,
-                'tel_pers' => $request->tel_pers,
-                'email_pers'=>$request->email_pers,
-                'dateN_pers' => $request->dateN_pers,
-                'adress_pers' => $request->adress_pers,
-                'qualif_pers' => $request->qualif_pers,
-                
-            ]);
-           
-
-             
-return redirect(route('Personnel.index'));
-    
+        $status = Statut::all();
+        return view('Personnel.create', compact('user', 'status'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Personnel  $Personnel
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Personnel $Personnel)
+    public function show(User $user)
     {
         // dd($Personnel->id);
-        $cours=Personnel::where('Personnels_id','=',$Personnel->id)->get();
-        
+        $cours=User::where('users_id','=',$user->id)->get();
 
-        return view('Personnel.show',compact('cours'));
+
+        return view('personnel.show',compact('cours'));
 
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Personnel  $Personnel
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Personnel $Personnel)
+    public function edit(User $user)
     {
         //
     }
@@ -125,22 +66,43 @@ return redirect(route('Personnel.index'));
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Personnel  $Personnel
+     * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Personnel $Personnel)
+    public function update(Request $request, User $user)
     {
-        //
+
+     $request->validate([
+       'statut_id' => 'required|exists:statuts,id'
+        ]);
+
+       $data = $request->except('_token');
+       $user->update($data);
+
+        return redirect()->route('personnel.index');
     }
+
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Personnel  $Personnel
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Personnel $Personnel)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect()->route('Personnel.index');
     }
+
+   /* public function guard()
+    {
+        $user = Auth::user();
+        if ($user->statut->titre_status != 'pharmacien') {
+            return $user;
+        } else {
+            return response()->json(['key' => 'l\'utilisateur n\'est pas un admin']);
+        }
+    }*/
 }
